@@ -15,6 +15,11 @@
   },
   "plugins": ["@typescript-eslint", "prettier", "eslint-plugin-import-helpers"],
   "rules": {
+    "no-shadow": "off",
+    "no-console": "off",
+    "no-empty-function": "off",
+    "lines-between-class-members": "off",
+    "no-useless-constructor": "off",
     "prettier/prettier": "error",
     "import/no-unresolved": "error",
     "class-methods-use-this": "off",
