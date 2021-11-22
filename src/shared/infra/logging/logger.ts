@@ -40,7 +40,7 @@ const logger = winston.createLogger({
       filename: 'logs/error.log',
       level: 'error',
     }),
-    new winston.transports.File({ filename: 'logs/all.log' }),
+    // new winston.transports.File({ filename: 'logs/all.log' }),
   ],
 });
 

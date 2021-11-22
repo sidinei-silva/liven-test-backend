@@ -6,6 +6,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 
 import { AppError } from '../../errors/AppError';
+import morganMiddleware from './middlewares/morganMiddleware';
 import { router } from './routes';
 
 const app = express();
@@ -13,6 +14,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors());
+app.use(morganMiddleware);
 app.use('/v1', router);
 
 app.use(
