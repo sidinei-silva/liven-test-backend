@@ -1,4 +1,6 @@
+import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO';
 import { UsersRepositoryInMemory } from '@modules/users/repositories/implementations/in-memory/UsersRepositoryInMemory';
+import { AppError } from '@shared/errors/AppError';
 
 import { CreateUserUseCase } from './CreateUserUseCase';
 
@@ -20,5 +22,19 @@ describe('Create User Use Case', () => {
 
     expect(user).toBeDefined();
     expect(user).toHaveProperty('id');
+  });
+
+  it('should not be able to create a new user with email exists', async () => {
+    const user: ICreateUserDTO = {
+      name: 'Sidinei Silva',
+      email: 'sidinei.silva02@gmail.com',
+      password: '123456',
+    };
+
+    await createUserUseCase.execute(user);
+
+    await expect(createUserUseCase.execute(user)).rejects.toEqual(
+      new AppError('User already exists', 400),
+    );
   });
 });
