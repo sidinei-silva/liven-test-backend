@@ -12,7 +12,6 @@ const typeOrmCreateConnection = async (
       return createConnection();
     case 'test':
       return createConnection({
-        name: 'testConnection',
         type: 'sqlite',
         database: ':memory:',
         entities: ['./src/modules/**/entities/*.ts'],
