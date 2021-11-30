@@ -1,16 +1,17 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
 import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO';
 
 import { CreateUserUseCase } from './CreateUserUseCase';
 
 export class CreateUserController {
-  constructor(private readonly createUserUseCase: CreateUserUseCase) {}
-
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, email, password }: ICreateUserDTO = request.body;
 
-    const user = await this.createUserUseCase.execute({
+    const createUserUseCase = container.resolve(CreateUserUseCase);
+
+    const user = await createUserUseCase.execute({
       email,
       name,
       password,
