@@ -48,6 +48,7 @@
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5.0.2",
     "supertest": "^6.1.6",
+    "tsyringe": "^4.6.0",
     "typeorm": "^0.2.41",
     "uuidv4": "^6.2.12",
     "winston": "^3.3.3"
