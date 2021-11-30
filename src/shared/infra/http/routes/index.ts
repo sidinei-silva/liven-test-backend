@@ -1,12 +1,10 @@
 import { Router } from 'express';
 
-import { createUserController } from '@modules/users/useCases/createUser';
+import { usersRoutes } from '@modules/users/infra/http/routes/users.routes';
 
 const router = Router();
 
 router.use('/status', (req, res) => res.status(200).json({ status: 'ok' }));
-router.use('/users', (request, response) => {
-  return createUserController.handle(request, response);
-});
+router.use('/users', usersRoutes);
 
 export { router };
