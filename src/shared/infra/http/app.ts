@@ -5,10 +5,15 @@ import express, { NextFunction, Request, Response } from 'express';
 
 import 'express-async-errors';
 
+import '@shared/infra/container';
+
+import { typeOrmCreateConnection } from '@shared/infra/typeorm/index';
+
 import { AppError } from '../../errors/AppError';
 import morganMiddleware from './middlewares/morganMiddleware';
 import { router } from './routes';
 
+typeOrmCreateConnection('default');
 const app = express();
 
 app.use(express.json());

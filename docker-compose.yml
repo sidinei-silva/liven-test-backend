@@ -8,6 +8,8 @@ services:
     command: npm run dev
     environment:
       - NODE_ENV=development
+      - 'DB_HOST=postgres'
+      - 'DB_PORT=5432'
     env_file:
       - .env
     volumes:
@@ -18,8 +20,28 @@ services:
     networks:
       - liven-teste-network
     restart: unless-stopped
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:12
+    container_name: liven-teste-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - ${DB_PORT}:5432
+    networks:
+      - liven-teste-network
+    volumes:
+      - liven-teste-postgres-volume:/data
+    restart: unless-stopped
 
 networks:
   liven-teste-network:
     name: liven-teste-network
 
+volumes:
+  liven-teste-postgres-volume:
+    name: liven-teste-postgres-volume
