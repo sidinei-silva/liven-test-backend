@@ -3,21 +3,10 @@ import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
 import auth from '@config/auth';
+import { IAuthenticateUserDTO } from '@modules/users/dtos/IAuthenticateUserDTO';
+import { IAuthenticateUserResponseDTO } from '@modules/users/dtos/IAuthenticateUserResponseDTO';
 import { IUsersRepository } from '@modules/users/repositories/IUsersRepository';
 import { AppError } from '@shared/errors/AppError';
-
-interface IRequest {
-  email: string;
-  password: string;
-}
-
-interface IResponse {
-  user: {
-    name: string;
-    email: string;
-  };
-  token: string;
-}
 
 @injectable()
 export class AuthenticateUserUseCase {
@@ -26,7 +15,10 @@ export class AuthenticateUserUseCase {
     private usersRepository: IUsersRepository,
   ) {}
 
-  async execute({ email, password }: IRequest): Promise<IResponse> {
+  async execute({
+    email,
+    password,
+  }: IAuthenticateUserDTO): Promise<IAuthenticateUserResponseDTO> {
     const user = await this.usersRepository.findByEmail(email);
 
     const { expiresInToken, secretToken } = auth;
