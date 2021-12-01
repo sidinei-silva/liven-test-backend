@@ -7,6 +7,8 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" ",
     "build": "tsc",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f ./ormconfig.js",
+    "typeorm:migrate": "npm run typeorm -- migration:run",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "test": "NODE_ENV=test jest --runInBand --detectOpenHandles"
   },
@@ -45,6 +47,7 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "morgan": "^1.10.0",
+    "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5.0.2",
     "supertest": "^6.1.6",

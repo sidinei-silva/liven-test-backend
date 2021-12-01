@@ -13,7 +13,7 @@ import { AppError } from '../../errors/AppError';
 import morganMiddleware from './middlewares/morganMiddleware';
 import { router } from './routes';
 
-typeOrmCreateConnection('test');
+typeOrmCreateConnection('default');
 const app = express();
 
 app.use(express.json());
