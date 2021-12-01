@@ -7,7 +7,7 @@ import { typeOrmCreateConnection } from '@shared/infra/typeorm';
 
 let connection: Connection;
 
-describe('Create User Controller', () => {
+describe('Authenticate User Controller', () => {
   beforeAll(async () => {
     connection = await typeOrmCreateConnection('test');
     await connection.runMigrations();
@@ -18,19 +18,34 @@ describe('Create User Controller', () => {
     await connection.close();
   });
 
-  it('should be able to create a new User', async () => {
-    const response = await request(app).post('/v1/users').send({
-      email: 'sidinei.silva02@gmail.com',
+  it('should be able to authenticate', async () => {
+    const user: ICreateUserDTO = {
       name: 'Sidinei Silva',
+      email: 'sidinei.silva02@gmail.com',
       password: '123456',
+    };
+
+    await request(app).post('/v1/users').send({
+      email: user.email,
+      name: user.name,
+      password: user.password,
+    });
+
+    const response = await request(app).post('/v1/users/authenticate').send({
+      email: user.email,
+      password: user.password,
     });
 
     expect(response.status).toBe(201);
+
     expect(response.body).toMatchObject({
       data: {
-        email: 'sidinei.silva02@gmail.com',
-        name: 'Sidinei Silva',
+        user: {
+          email: 'sidinei.silva02@gmail.com',
+          name: 'Sidinei Silva',
+        },
       },
     });
+    expect(response.body.data).toHaveProperty('token');
   });
 });
