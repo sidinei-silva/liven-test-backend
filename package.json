@@ -10,7 +10,8 @@
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f ./ormconfig.js",
     "typeorm:migrate": "npm run typeorm -- migration:run",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
-    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles"
+    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles",
+    "test:watch": "NODE_ENV=test jest --watch --runInBand --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.0.3",
+    "@types/jsonwebtoken": "^8.5.6",
     "@types/morgan": "^1.9.3",
     "@types/node": "^16.11.9",
     "@types/supertest": "^2.0.11",
@@ -46,6 +48,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
